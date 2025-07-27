@@ -1,8 +1,8 @@
 import { createServerClient, type CookieOptions } from '@supabase/ssr'
 import { cookies } from 'next/headers'
 
-export function createClient() {
-  const cookieStore = cookies()
+export async function createClient() {
+  const cookieStore = await cookies()
 
   return createServerClient(
     process.env.NEXT_PUBLIC_SUPABASE_URL!,
@@ -24,13 +24,10 @@ export function createClient() {
           try {
             cookieStore.set({ name, value: '', ...options })
           } catch (error) {
-            // The `cookies()` helper can be called only from a Server Component or Server Action.
-            // This error is typically thrown when running a Server Component that uses cookies() for the first time, but it can be safely ignored.
+            // The `cookies()` helper can be called only from a Server Component that uses cookies() for the first time, but it can be safely ignored.
           }
         },
       },
     }
   )
 }
-
-

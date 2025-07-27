@@ -2,7 +2,7 @@ import { createClient } from '@/lib/supabaseServer'
 import { redirect } from 'next/navigation'
 
 export default async function DashboardPage() {
-  const supabase = createClient()
+  const supabase = await createClient()
 
   const { data: { user } } = await supabase.auth.getUser()
 
@@ -48,7 +48,7 @@ export default async function DashboardPage() {
             </div>
           ) : (
             <div className="text-center py-8">
-              <p className="text-gray-500 mb-4">You don't have any dashboards yet.</p>
+              <p className="text-gray-500 mb-4">You don&apos;t have any dashboards yet.</p>
               <button className="bg-indigo-600 text-white px-4 py-2 rounded-md hover:bg-indigo-700">
                 Create Your First Dashboard
               </button>
